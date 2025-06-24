@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_activity_nav"
+    app:startDestination="@id/loginScreen">
+
+    <fragment
+        android:id="@+id/loginScreen"
+        android:name="com.example.shopn.ui.screen.LoginScreen"
+        android:label="login_screen"
+        tools:layout="@layout/login_screen" >
+        <action
+            android:id="@+id/action_loginScreen_to_mainScreen"
+            app:destination="@id/mainScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainScreen"
+        android:name="com.example.shopn.ui.screen.MainScreen"
+        android:label="main_screen"
+        tools:layout="@layout/main_screen" >
+        <action
+            android:id="@+id/action_mainScreen_to_detailScreen"
+            app:destination="@id/detailScreen" />
+        <action
+            android:id="@+id/action_mainScreen_to_cartScreen"
+            app:destination="@id/cartScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailScreen"
+        android:name="com.example.shopn.ui.screen.DetailScreen"
+        android:label="detail_screen"
+        tools:layout="@layout/detail_screen" />
+    <fragment
+        android:id="@+id/cartScreen"
+        android:name="com.example.shopn.ui.screen.CartScreen"
+        android:label="cart_screen"
+        tools:layout="@layout/cart_screen" />
+</navigation>
