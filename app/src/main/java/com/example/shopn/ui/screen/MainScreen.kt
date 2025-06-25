@@ -5,23 +5,35 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.shopn.R
+import androidx.fragment.app.viewModels
+import com.example.shopn.databinding.MainScreenBinding
+import com.example.shopn.ui.viewmodel.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainScreen : Fragment() {
+
+    private lateinit var binding: MainScreenBinding
+    private lateinit var viewModel : MainViewModel
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        val tempViewModel : MainViewModel by viewModels()
+        viewModel = tempViewModel
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.main_screen, container, false)
+
+        binding = MainScreenBinding.inflate(inflater, container, false)
+
+
+
+        return binding.root
     }
 
 

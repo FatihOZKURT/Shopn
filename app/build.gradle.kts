@@ -10,6 +10,10 @@ android {
     namespace = "com.example.shopn"
     compileSdk = 36
 
+    buildFeatures {
+        viewBinding = true
+    }
+    
     defaultConfig {
         applicationId = "com.example.shopn"
         minSdk = 24

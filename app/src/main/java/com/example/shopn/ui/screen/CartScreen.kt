@@ -5,14 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.shopn.R
+import androidx.fragment.app.viewModels
+import com.example.shopn.databinding.CartScreenBinding
+import com.example.shopn.ui.viewmodel.CartViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class CartScreen : Fragment() {
-
+    private lateinit var binding : CartScreenBinding
+    private lateinit var viewModel : CartViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val tempViewModel : CartViewModel by viewModels()
+        viewModel = tempViewModel
     }
 
 
@@ -20,8 +26,13 @@ class CartScreen : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.cart_screen, container, false)
+        binding = CartScreenBinding.inflate(inflater, container, false)
+
+
+
+
+
+        return binding.root
     }
 
 
