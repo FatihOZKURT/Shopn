@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_loginScreen_to_mainScreen"
             app:destination="@id/mainScreen" />
+        <action
+            android:id="@+id/action_loginScreen_to_registerScreen"
+            app:destination="@id/registerScreen" />
     </fragment>
     <fragment
         android:id="@+id/mainScreen"
@@ -36,4 +39,13 @@
         android:name="com.example.shopn.ui.screen.CartScreen"
         android:label="cart_screen"
         tools:layout="@layout/cart_screen" />
+    <fragment
+        android:id="@+id/registerScreen"
+        android:name="com.example.shopn.ui.screen.RegisterScreen"
+        android:label="register_screen"
+        tools:layout="@layout/register_screen" >
+        <action
+            android:id="@+id/action_registerScreen_to_mainScreen"
+            app:destination="@id/mainScreen" />
+    </fragment>
 </navigation>
