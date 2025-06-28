@@ -113,13 +113,18 @@
                 android:id="@+id/signUpWithGoogle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="64dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:text="Sign Up with Google "
+                android:layout_marginEnd="62dp"
+                android:text="Sign up with Google"
+                app:icon="@drawable/google"
+                app:iconTint="@null"
+                android:padding="10dp"
+                android:textAlignment="viewStart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
             <TextView
                 android:id="@+id/goToLoginText"
                 android:layout_width="wrap_content"
