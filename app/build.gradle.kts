@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.shopn"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -75,6 +75,8 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.android.gms:play-services-auth:21.0.0")
     implementation ("com.google.firebase:firebase-auth-ktx")
+
+    implementation(libs.androidx.material.icons.extended)
 
 
 }

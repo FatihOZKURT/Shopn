@@ -23,17 +23,21 @@
         android:label="main_screen"
         tools:layout="@layout/main_screen" >
         <action
-            android:id="@+id/action_mainScreen_to_detailScreen"
+            android:id="@+id/toDetailScreen"
             app:destination="@id/detailScreen" />
         <action
-            android:id="@+id/action_mainScreen_to_cartScreen"
+            android:id="@+id/toCartScreen"
             app:destination="@id/cartScreen" />
     </fragment>
     <fragment
         android:id="@+id/detailScreen"
         android:name="com.example.shopn.ui.screen.DetailScreen"
         android:label="detail_screen"
-        tools:layout="@layout/detail_screen" />
+        tools:layout="@layout/detail_screen" >
+        <argument
+            android:name="product"
+            app:argType="com.example.shopn.data.entity.Products" />
+    </fragment>
     <fragment
         android:id="@+id/cartScreen"
         android:name="com.example.shopn.ui.screen.CartScreen"
