@@ -1,5 +1,6 @@
 package com.example.shopn.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.shopn.data.entity.Products
@@ -23,8 +24,12 @@ class MainViewModel @Inject constructor(var shopRepository: ShopRepository) : Vi
 
     fun loadProducts() {
         CoroutineScope(Dispatchers.Main).launch {
-            allProducts = shopRepository.loadProducts()
-            productsList.value = allProducts
+            try {
+                allProducts = shopRepository.loadProducts()
+                productsList.value = allProducts
+            } catch (e: Exception) {
+                Log.e("Error", e.toString())
+            }
         }
     }
 

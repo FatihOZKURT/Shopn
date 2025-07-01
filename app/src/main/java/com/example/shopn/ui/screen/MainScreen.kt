@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.SearchView
+import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -27,6 +28,7 @@ class MainScreen : Fragment() {
         super.onCreate(savedInstanceState)
         val tempViewModel : MainViewModel by viewModels()
         viewModel = tempViewModel
+        requireActivity().onBackPressedDispatcher.addCallback(this) {}
     }
 
     override fun onCreateView(

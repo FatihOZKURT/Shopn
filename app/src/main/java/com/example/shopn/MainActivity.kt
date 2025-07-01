@@ -1,12 +1,10 @@
 package com.example.shopn
 
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.shopn.databinding.ActivityMainBinding
-import com.example.shopn.databinding.MainScreenBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,9 +30,28 @@ class MainActivity : AppCompatActivity() {
                     navController?.navigate(R.id.cartScreen)
                     true
                 }
+                R.id.menu_favorite -> {
+                    navController?.navigate(R.id.favoriteScreen)
+                    true
+                }
+                R.id.menu_profile -> {
+                    navController?.navigate(R.id.profileScreen)
+                    true
+                }
                 else -> false
             }
         }
+
+        navController?.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.loginScreen,
+                R.id.registerScreen,
+                R.id.splashScreen,
+                R.id.detailScreen    -> binding.bottomNavigationView.visibility = View.GONE
+                else -> binding.bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
+
     }
 
 
