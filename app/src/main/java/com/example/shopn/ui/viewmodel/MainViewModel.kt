@@ -14,6 +14,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(var shopRepository: ShopRepository) : ViewModel() {
 
     var productsList = MutableLiveData<List<Products>>()
+    private var allProducts = listOf<Products>()
 
     init {
         loadProducts()
@@ -22,9 +23,21 @@ class MainViewModel @Inject constructor(var shopRepository: ShopRepository) : Vi
 
     fun loadProducts() {
         CoroutineScope(Dispatchers.Main).launch {
-            productsList.value = shopRepository.loadProducts()
+            allProducts = shopRepository.loadProducts()
+            productsList.value = allProducts
         }
     }
 
+    fun search(query: String) {
+        productsList.value = if (query.isEmpty()) {
+            allProducts
+        } else {
+            allProducts.filter {
+                it.productName.contains(query, ignoreCase = true) ||
+                        it.productBrand.contains(query, ignoreCase = true) ||
+                        it.productCategory.contains(query, ignoreCase = true)
+            }
+        }
+    }
 
 }

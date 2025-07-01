@@ -6,15 +6,15 @@ import java.io.Serializable
 
 data class Products(
     @SerializedName("id")
-    var id: Int,
+    var productId: Int,
     @SerializedName("ad")
-    var ad: String,
+    var productName: String,
     @SerializedName("resim")
-    var resim: String,
+    var productImage: String,
     @SerializedName("kategori")
-    var kategori: String,
+    var productCategory: String,
     @SerializedName("fiyat")
-    var fiyat: Int,
+    var productPrice: Int,
     @SerializedName("marka")
-    var marka: String
+    var productBrand: String
 ) : Serializable

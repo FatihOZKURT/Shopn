@@ -37,14 +37,14 @@ class ProductsAdapter (
         val product = productsList[position]
         val design = holder.binding
 
-        val imageUrl = "http://kasimadalan.pe.hu/urunler/resimler/${product.resim}"
+        val imageUrl = "http://kasimadalan.pe.hu/urunler/resimler/${product.productImage}"
         Glide.with(mContext)
             .load(imageUrl)
             .into(design.imageViewProduct)
 
-        design.textViewTitle.text = product.ad
-        design.textViewBrand.text = product.marka
-        design.textViewPrice.text = "₺${product.fiyat}"
+        design.textViewTitle.text = product.productName
+        design.textViewBrand.text = product.productBrand
+        design.textViewPrice.text = "₺${product.productPrice}"
 
         design.cardViewProduct.setOnClickListener {
             val toDetailScreen = MainScreenDirections.toDetailScreen(product = product)

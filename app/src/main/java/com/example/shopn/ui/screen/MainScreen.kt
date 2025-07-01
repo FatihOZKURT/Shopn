@@ -6,8 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.SearchView
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.shopn.R
 import com.example.shopn.databinding.MainScreenBinding
 import com.example.shopn.ui.adapter.ProductsAdapter
 import com.example.shopn.ui.viewmodel.MainViewModel
@@ -32,6 +36,17 @@ class MainScreen : Fragment() {
 
         binding = MainScreenBinding.inflate(inflater, container, false)
 
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.search(newText.orEmpty())
+                return true
+            }
+        })
+
         viewModel.productsList.observe(viewLifecycleOwner){ productList ->
             val productsAdapter = ProductsAdapter(requireContext(), productList, viewModel)
             binding.recyclerViewProducts.adapter = productsAdapter
@@ -40,13 +55,13 @@ class MainScreen : Fragment() {
         binding.recyclerViewProducts.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
 
+
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.loadProducts()
-
     }
 
 }

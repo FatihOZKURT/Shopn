@@ -43,20 +43,20 @@
         android:id="@+id/textViewName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Ürünün Adı"
+        android:textAlignment="center"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@id/imageViewProduct"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewProduct" />
 
     <TextView
         android:id="@+id/textViewBrand"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Marka: Tanımlanmamış"
         android:textColor="#666666"
         android:textSize="16sp"
