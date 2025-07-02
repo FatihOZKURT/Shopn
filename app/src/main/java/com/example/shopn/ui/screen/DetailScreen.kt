@@ -1,10 +1,12 @@
 package com.example.shopn.ui.screen
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -66,6 +68,31 @@ class DetailScreen : Fragment() {
             quantity++
             updateQuantityAndTotal()
         }
+
+        binding.buttonAddToCart.setOnClickListener {
+            val sharedPreferences = requireContext().getSharedPreferences("user_info", Context.MODE_PRIVATE)
+            val userName = sharedPreferences.getString("email", "") ?: ""
+
+            val ad = product.productName
+            val resim = product.productImage
+            val kategori = product.productCategory
+            val fiyat = product.productPrice
+            val marka = product.productBrand
+            val siparisAdeti = quantity
+            val kullaniciAdi = userName
+
+            viewModel.addToCart(ad, resim, kategori, fiyat, marka, siparisAdeti, kullaniciAdi)
+
+        }
+
+        viewModel.addToCartResult.observe(viewLifecycleOwner) { success ->
+            if (success) {
+                Toast.makeText(requireContext(), "Ürün sepete eklendi!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Sepete eklenemedi.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
         return binding.root
     }
