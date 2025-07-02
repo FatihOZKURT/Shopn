@@ -18,7 +18,6 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "GOOGLE_CLIENT_ID", "\"${project.properties["GOOGLE_CLIENT_ID"]}\"")
     }
 
     buildTypes {
@@ -74,7 +73,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.16.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.android.gms:play-services-auth:21.0.0")
-    implementation ("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-auth-ktx")
 
     implementation(libs.androidx.material.icons.extended)
 

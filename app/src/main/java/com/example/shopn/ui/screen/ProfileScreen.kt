@@ -10,8 +10,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.shopn.R
 import com.example.shopn.databinding.ProfileScreenBinding
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ProfileScreen : Fragment() {
 
     private lateinit var binding: ProfileScreenBinding
