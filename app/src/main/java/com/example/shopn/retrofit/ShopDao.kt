@@ -34,6 +34,12 @@ interface ShopDao {
         @Field("kullaniciAdi") kullaniciAdi: String
     ): CartResponse
 
+    @FormUrlEncoded
+    @POST("urunler/sepettenUrunSil.php")
+    suspend fun deleteFromCart(
+        @Field("sepetId") sepetId: Int,
+        @Field("kullaniciAdi") kullaniciAdi: String
+    ): CRUDResponse
 
 
 }

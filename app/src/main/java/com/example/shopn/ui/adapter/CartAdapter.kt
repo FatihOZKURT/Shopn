@@ -48,13 +48,29 @@ class CartAdapter(
             .load(imageUrl)
             .into(design.imageViewProduct)
 
+        design.imageButtonRemove.setOnClickListener {
+            if (cartItem.orderQuantity > 1) {
+                // Adeti 1 azaltmak için: önce sil, sonra yeni adetle tekrar ekle
+                val newQuantity = cartItem.orderQuantity - 1
+                viewModel.removeAndReAddItemWithQuantity(
+                    cartItem.cartId,
+                    cartItem.productName,
+                    cartItem.productImage,
+                    cartItem.productCategory,
+                    cartItem.productPrice,
+                    cartItem.productBrand,
+                    newQuantity,
+                    cartItem.username
+                )
+            } else {
+                // Ürün adedi zaten 1'di → direkt sil
+                viewModel.deleteFromCart(cartItem.cartId, cartItem.username)
+            }
+        }
         design.cardViewCartItem.setOnClickListener {
 
         }
 
-        design.imageButtonRemove.setOnClickListener {
-
-        }
     }
 
     override fun getItemCount(): Int {

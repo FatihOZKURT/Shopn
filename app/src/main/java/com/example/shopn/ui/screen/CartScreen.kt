@@ -43,9 +43,19 @@ class CartScreen : Fragment() {
         binding.recyclerViewCartItems.adapter = cartAdapter
 
         viewModel.cartItems.observe(viewLifecycleOwner) { cartItems ->
-            cartAdapter.updateCartItems(cartItems)  // Güncelleme fonksiyonu eklenmeli adapterda
-            val totalPrice = cartItems.sumOf { it.productPrice * it.orderQuantity }
-            binding.textViewTotalPrice.text = "Toplam Fiyat: ₺$totalPrice"
+            if (cartItems.isNullOrEmpty()) {
+                binding.recyclerViewCartItems.visibility = View.GONE
+                binding.textViewEmptyCartMessage.visibility = View.VISIBLE
+                binding.textViewEmptyCartMessage.text = "Sepetinizde ürün bulunmamaktadır."
+                binding.textViewTotalPrice.text = "Toplam Fiyat: ₺0"
+            } else {
+                binding.recyclerViewCartItems.visibility = View.VISIBLE
+                binding.textViewEmptyCartMessage.visibility = View.GONE
+                cartAdapter.updateCartItems(cartItems)
+
+                val totalPrice = cartItems.sumOf { it.productPrice * it.orderQuantity }
+                binding.textViewTotalPrice.text = "Toplam Fiyat: ₺$totalPrice"
+            }
         }
 
         return binding.root

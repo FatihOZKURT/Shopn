@@ -25,4 +25,8 @@ class ShopRepository ( var shopDataSource: ShopDataSource) {
         return shopDataSource.getCartItems(kullaniciAdi)
     }
 
+    suspend fun deleteFromCart(sepetId: Int, kullaniciAdi: String): CRUDResponse {
+        return shopDataSource.deleteFromCart(sepetId, kullaniciAdi)
+    }
+
 }

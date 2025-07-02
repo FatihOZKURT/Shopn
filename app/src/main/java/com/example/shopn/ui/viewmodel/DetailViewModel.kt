@@ -1,9 +1,11 @@
 package com.example.shopn.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.shopn.data.entity.CartItem
 import com.example.shopn.data.repo.ShopRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -17,7 +19,7 @@ class DetailViewModel @Inject constructor(var shopRepository: ShopRepository) : 
     private val _addToCartResult = MutableLiveData<Boolean>()
     val addToCartResult: LiveData<Boolean> get() = _addToCartResult
 
-    fun addToCart(
+    fun addOrUpdateCartItem(
         ad: String,
         resim: String,
         kategori: String,
@@ -28,8 +30,24 @@ class DetailViewModel @Inject constructor(var shopRepository: ShopRepository) : 
     ) {
         viewModelScope.launch {
             try {
-                val response = shopRepository.addToCart(ad, resim, kategori, fiyat, marka, siparisAdeti, kullaniciAdi)
-                _addToCartResult.value = response.success == 1
+                val cartItems = try {
+                    shopRepository.getCartItems(kullaniciAdi)
+                } catch (e: Exception) {
+                    emptyList<CartItem>()
+                }
+
+                val existingItem = cartItems.find {
+                    it.productName == ad && it.productBrand == marka
+                }
+
+                if (existingItem != null) {
+                    val newQuantity = existingItem.orderQuantity + siparisAdeti
+                    shopRepository.deleteFromCart(existingItem.cartId, kullaniciAdi)
+                    shopRepository.addToCart(ad, resim, kategori, fiyat, marka, newQuantity, kullaniciAdi)
+                } else {
+                    shopRepository.addToCart(ad, resim, kategori, fiyat, marka, siparisAdeti, kullaniciAdi)
+                }
+                _addToCartResult.value = true
             } catch (e: Exception) {
                 _addToCartResult.value = false
             }

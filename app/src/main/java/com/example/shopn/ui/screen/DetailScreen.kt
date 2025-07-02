@@ -81,9 +81,10 @@ class DetailScreen : Fragment() {
             val siparisAdeti = quantity
             val kullaniciAdi = userName
 
-            viewModel.addToCart(ad, resim, kategori, fiyat, marka, siparisAdeti, kullaniciAdi)
-
+            // Sepette aynı ürün varsa önce silip sonra yeni adetle ekle
+            viewModel.addOrUpdateCartItem(ad, resim, kategori, fiyat, marka, siparisAdeti, kullaniciAdi)
         }
+
 
         viewModel.addToCartResult.observe(viewLifecycleOwner) { success ->
             if (success) {

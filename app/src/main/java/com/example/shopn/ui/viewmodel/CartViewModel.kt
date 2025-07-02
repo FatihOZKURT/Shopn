@@ -26,7 +26,44 @@ class CartViewModel @Inject constructor(
                 _cartItems.value = items
             } catch (e: Exception) {
                 Log.e("CartViewModel", "Sepet verileri alınamadı", e)
+                _cartItems.value = emptyList()
             }
         }
     }
+
+    fun deleteFromCart(cartId: Int, userName: String) {
+        viewModelScope.launch {
+            try {
+                shopRepository.deleteFromCart(cartId, userName)
+                getCartItems(userName) // Listeyi yenile
+            } catch (e: Exception) {
+                Log.e("CartViewModel", "Silme işlemi başarısız", e)
+            }
+        }
+    }
+
+    fun removeAndReAddItemWithQuantity(
+        cartId: Int,
+        ad: String,
+        resim: String,
+        kategori: String,
+        fiyat: Int,
+        marka: String,
+        yeniAdet: Int,
+        kullaniciAdi: String
+    ) {
+        viewModelScope.launch {
+            try {
+                // Önce eskiyi sil
+                shopRepository.deleteFromCart(cartId, kullaniciAdi)
+                // Sonra yeni adetle tekrar ekle
+                shopRepository.addToCart(ad, resim, kategori, fiyat, marka, yeniAdet, kullaniciAdi)
+                // Listeyi güncelle
+                getCartItems(kullaniciAdi)
+            } catch (e: Exception) {
+                Log.e("CartViewModel", "Güncelleme hatası", e)
+            }
+        }
+    }
+
 }
