@@ -1,6 +1,7 @@
 package com.example.shopn.data.datasource
 
 import com.example.shopn.data.entity.CRUDResponse
+import com.example.shopn.data.entity.CartItem
 import com.example.shopn.data.entity.Products
 import com.example.shopn.retrofit.ShopDao
 import kotlinx.coroutines.Dispatchers
@@ -22,6 +23,10 @@ class ShopDataSource(var shopDao: ShopDao) {
         kullaniciAdi: String
     ): CRUDResponse {
         return shopDao.addToCart(ad, resim, kategori, fiyat, marka, siparisAdeti, kullaniciAdi)
+    }
+
+    suspend fun getCartItems(kullaniciAdi: String): List<CartItem> = withContext(Dispatchers.IO) {
+        return@withContext shopDao.getCartItems(kullaniciAdi).cartItems
     }
 
 

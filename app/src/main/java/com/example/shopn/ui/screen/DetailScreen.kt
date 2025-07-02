@@ -87,9 +87,9 @@ class DetailScreen : Fragment() {
 
         viewModel.addToCartResult.observe(viewLifecycleOwner) { success ->
             if (success) {
-                Toast.makeText(requireContext(), "Ürün sepete eklendi!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Ürün sepete eklendi", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(requireContext(), "Sepete eklenemedi.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Sepete eklenirken bir hata oluştu.", Toast.LENGTH_SHORT).show()
             }
         }
 

@@ -2,6 +2,8 @@ package com.example.shopn.retrofit
 
 
 import com.example.shopn.data.entity.CRUDResponse
+import com.example.shopn.data.entity.CartItem
+import com.example.shopn.data.entity.CartResponse
 import com.example.shopn.data.entity.ProductsResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -24,5 +26,14 @@ interface ShopDao {
         @Field("siparisAdeti") siparisAdeti: Int,
         @Field("kullaniciAdi") kullaniciAdi: String
     ): CRUDResponse
+
+
+    @FormUrlEncoded
+    @POST("urunler/sepettekiUrunleriGetir.php")
+    suspend fun getCartItems(
+        @Field("kullaniciAdi") kullaniciAdi: String
+    ): CartResponse
+
+
 
 }
