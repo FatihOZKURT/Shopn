@@ -68,7 +68,7 @@ class LoginScreen : Fragment() {
                 val email = FirebaseAuth.getInstance().currentUser?.email ?: ""
                 saveEmailToPrefs(email)
 
-                Toast.makeText(requireContext(), "Giriş Başarılı", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Hoşgeldiniz, keyifli alışverişler", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_loginScreen_to_mainScreen)
             } else {
                 Toast.makeText(requireContext(), "Giriş Başarısız", Toast.LENGTH_SHORT).show()
@@ -77,6 +77,21 @@ class LoginScreen : Fragment() {
 
         binding.goToRegisterText.setOnClickListener {
             findNavController().navigate(R.id.action_loginScreen_to_registerScreen)
+        }
+
+        binding.forgotPassword.setOnClickListener {
+            val email = binding.emailTextLogin.text.toString().trim()
+            viewModel.resetPassword(email)
+        }
+
+        viewModel.resetPasswordStatus.observe(viewLifecycleOwner) { result ->
+            result
+                .onSuccess {
+                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                }
+                .onFailure {
+                    Toast.makeText(requireContext(), "Hata: ${it.localizedMessage}", Toast.LENGTH_SHORT).show()
+                }
         }
 
         return binding.root

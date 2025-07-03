@@ -13,8 +13,12 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(var shopRepository: ShopRepository) : ViewModel() {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+
     private val _loginStatus = MutableLiveData<Boolean>()
     val loginStatus: LiveData<Boolean> = _loginStatus
+
+    private val _resetPasswordStatus = MutableLiveData<Result<String>>()
+    val resetPasswordStatus: LiveData<Result<String>> = _resetPasswordStatus
 
     fun loginWithEmail(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
@@ -30,5 +34,21 @@ class LoginViewModel @Inject constructor(var shopRepository: ShopRepository) : V
                 _loginStatus.value = task.isSuccessful
             }
     }
+
+    fun resetPassword(email: String) {
+        if (email.isBlank()) {
+            _resetPasswordStatus.value = Result.failure(Exception("Lütfen geçerli bir e-posta giriniz"))
+            return
+        }
+
+        auth.sendPasswordResetEmail(email)
+            .addOnSuccessListener {
+                _resetPasswordStatus.value = Result.success("Şifre sıfırlama e-postası gönderildi")
+            }
+            .addOnFailureListener {
+                _resetPasswordStatus.value = Result.failure(it)
+            }
+    }
+
 
 }
