@@ -46,7 +46,6 @@ class CartScreen : Fragment() {
             if (cartItems.isNullOrEmpty()) {
                 binding.recyclerViewCartItems.visibility = View.GONE
                 binding.textViewEmptyCartMessage.visibility = View.VISIBLE
-                binding.textViewEmptyCartMessage.text = "Sepetinizde ürün bulunmamaktadır."
                 binding.textViewTotalPrice.text = "Toplam Fiyat: ₺0"
             } else {
                 binding.recyclerViewCartItems.visibility = View.VISIBLE

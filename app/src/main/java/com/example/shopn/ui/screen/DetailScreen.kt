@@ -94,6 +94,10 @@ class DetailScreen : Fragment() {
             }
         }
 
+        binding.imageButtonFavorite.setOnClickListener {
+
+        }
+
 
         return binding.root
     }

@@ -1,19 +1,14 @@
 package com.example.shopn.ui.adapter
 
-import android.R.attr.action
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.shopn.data.entity.CartItem
 import com.example.shopn.databinding.CartItemBinding
-import com.example.shopn.ui.screen.CartScreenDirections
-import com.example.shopn.ui.screen.MainScreenDirections
 import com.example.shopn.ui.viewmodel.CartViewModel
-import com.example.shopn.util.toProduct
 
 
 class CartAdapter(
@@ -70,12 +65,6 @@ class CartAdapter(
                 viewModel.deleteFromCart(cartItem.cartId, cartItem.username)
             }
         }
-        design.cardViewCartItem.setOnClickListener {
-            val product = cartItem.toProduct()
-            val toDetailScreen = CartScreenDirections.actionCartScreenToDetailScreen(product)
-            it.findNavController().navigate(toDetailScreen)
-        }
-
     }
 
     override fun getItemCount(): Int {

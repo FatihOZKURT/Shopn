@@ -70,7 +70,7 @@ class RegisterScreen : Fragment() {
             viewModel.registerWithEmail(email, password)
         }
 
-        binding.signUpWithGoogle.setOnClickListener {
+        binding.imageButtonSignUpWithGoogle.setOnClickListener {
             googleSignInLauncher.launch(googleSignInClient.signInIntent)
         }
 

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.shopn.R
 import com.example.shopn.databinding.MainScreenBinding
 import com.example.shopn.ui.adapter.ProductsAdapter
+import com.example.shopn.ui.viewmodel.FavoriteViewModel
 import com.example.shopn.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,11 +24,15 @@ class MainScreen : Fragment() {
 
     private lateinit var binding: MainScreenBinding
     private lateinit var viewModel : MainViewModel
+    private lateinit var favViewModel: FavoriteViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val tempViewModel : MainViewModel by viewModels()
         viewModel = tempViewModel
+        val tempFavViewModel : FavoriteViewModel by viewModels()
+        favViewModel = tempFavViewModel
         requireActivity().onBackPressedDispatcher.addCallback(this) {}
     }
 
@@ -50,13 +55,11 @@ class MainScreen : Fragment() {
         })
 
         viewModel.productsList.observe(viewLifecycleOwner){ productList ->
-            val productsAdapter = ProductsAdapter(requireContext(), productList, viewModel)
+            val productsAdapter = ProductsAdapter(requireContext(), productList, favViewModel)
             binding.recyclerViewProducts.adapter = productsAdapter
         }
 
         binding.recyclerViewProducts.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-
-
 
         return binding.root
     }

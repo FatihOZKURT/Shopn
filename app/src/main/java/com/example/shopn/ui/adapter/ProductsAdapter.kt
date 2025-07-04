@@ -8,14 +8,15 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.shopn.data.entity.Products
-import com.example.shopn.ui.viewmodel.MainViewModel
 import com.example.shopn.databinding.ProductDesignBinding
 import com.example.shopn.ui.screen.MainScreenDirections
+import com.example.shopn.R
+import com.example.shopn.ui.viewmodel.FavoriteViewModel
 
 class ProductsAdapter (
     var mContext: Context,
     var productsList: List<Products>,
-    var viewModel: MainViewModel
+    var viewModel: FavoriteViewModel
 ) : RecyclerView.Adapter<ProductsAdapter.ProductDesignHolder>() {
 
     inner class ProductDesignHolder(var binding: ProductDesignBinding) :
@@ -51,8 +52,15 @@ class ProductsAdapter (
             it.findNavController().navigate(toDetailScreen)
         }
 
-        design.imageViewFavorite.setOnClickListener {
+        viewModel.checkFavorite(product.productId) { isFav ->
+            design.imageViewFavorite.setImageResource(
+                if (isFav) R.drawable.favorite else R.drawable.no_favorite
+            )
+        }
 
+        design.imageViewFavorite.setOnClickListener {
+            viewModel.toggleFavorite(product)
+            notifyItemChanged(position)
         }
     }
 

@@ -110,21 +110,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/createAccount" />
 
-            <Button
-                android:id="@+id/signUpWithGoogle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="64dp"
+            <ImageButton
+                android:id="@+id/imageButtonSignUpWithGoogle"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="62dp"
-                android:text="Google ile Kayıt Ol"
-                app:icon="@drawable/google"
-                app:iconTint="@null"
-                android:padding="10dp"
-                android:textAlignment="viewStart"
+                android:src="@drawable/google"
+                android:background="@drawable/google_button_border"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:elevation="2dp"
+                android:contentDescription="Google ile giriş"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                app:layout_constraintTop_toBottomOf="@id/textView4" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -137,7 +136,7 @@
                 android:text="Zaten bir hesabın var mı?"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/goToLoginText"
-                app:layout_constraintTop_toBottomOf="@+id/signUpWithGoogle"
+                app:layout_constraintTop_toBottomOf="@+id/imageButtonSignUpWithGoogle"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
@@ -153,7 +152,7 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/signUpWithGoogle" />
+                app:layout_constraintTop_toBottomOf="@+id/imageButtonSignUpWithGoogle" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

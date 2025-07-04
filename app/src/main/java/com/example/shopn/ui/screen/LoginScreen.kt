@@ -59,7 +59,7 @@ class LoginScreen : Fragment() {
             viewModel.loginWithEmail(email, password)
         }
 
-        binding.signInWithGoogle.setOnClickListener {
+        binding.imageButtonSignInWithGoogle.setOnClickListener {
             googleSignInLauncher.launch(googleSignInClient.signInIntent)
         }
 
