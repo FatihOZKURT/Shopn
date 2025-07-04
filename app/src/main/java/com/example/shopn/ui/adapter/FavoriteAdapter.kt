@@ -13,7 +13,8 @@ import androidx.appcompat.app.AlertDialog
 class FavoriteAdapter(
     private val context: Context,
     private val favoriteList: List<Favorite>,
-    private val onRemoveClick: (Favorite) -> Unit
+    private val onRemoveClick: (Favorite) -> Unit,
+    private val onItemClick: (Favorite) -> Unit
 ) : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
 
     inner class FavoriteViewHolder(val binding: FavoriteDesignBinding) :
@@ -48,7 +49,9 @@ class FavoriteAdapter(
                 .show()
         }
 
-
+        design.cardViewFavoriteItem.setOnClickListener {
+            onItemClick(favoriteItem)
+        }
 
     }
 

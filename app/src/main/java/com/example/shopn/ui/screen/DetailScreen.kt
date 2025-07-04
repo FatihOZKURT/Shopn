@@ -10,8 +10,10 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.shopn.R
 import com.example.shopn.databinding.DetailScreenBinding
 import com.example.shopn.ui.viewmodel.DetailViewModel
+import com.example.shopn.ui.viewmodel.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +21,7 @@ class DetailScreen : Fragment() {
 
     private lateinit var binding: DetailScreenBinding
     private lateinit var viewModel: DetailViewModel
+    private lateinit var favViewModel: FavoriteViewModel
 
     private var quantity = 1
     private var unitPrice = 0.0
@@ -26,7 +29,10 @@ class DetailScreen : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val tempViewModel: DetailViewModel by viewModels()
+        val tempFavViewModel: FavoriteViewModel by viewModels()
         viewModel = tempViewModel
+        favViewModel = tempFavViewModel
+
     }
 
     override fun onCreateView(
@@ -94,9 +100,18 @@ class DetailScreen : Fragment() {
             }
         }
 
-        binding.imageButtonFavorite.setOnClickListener {
-
+        favViewModel.checkFavorite(product.productId) { isFav ->
+            val iconRes = if (isFav) R.drawable.favorite else R.drawable.no_favorite
+            binding.imageButtonFavorite.setImageResource(iconRes)
         }
+
+        binding.imageButtonFavorite.setOnClickListener {
+            favViewModel.toggleFavorite(product) { isNowFavorite ->
+                val iconRes = if (isNowFavorite) R.drawable.favorite else R.drawable.no_favorite
+                binding.imageButtonFavorite.setImageResource(iconRes)
+            }
+        }
+
 
 
         return binding.root

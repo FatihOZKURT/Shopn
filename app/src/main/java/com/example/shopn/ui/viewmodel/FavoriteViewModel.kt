@@ -7,8 +7,6 @@ import com.example.shopn.data.entity.Products
 import com.example.shopn.room.Favorite
 import com.example.shopn.room.FavoriteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,9 +17,6 @@ class FavoriteViewModel @Inject constructor(
 
     val favorites = favRepo.getFavorites().asLiveData()
 
-    private val _isFavorite = MutableStateFlow(false)
-    val isFavorite: StateFlow<Boolean> = _isFavorite
-
     fun checkFavorite(productId: Int, callback: (Boolean) -> Unit) {
         viewModelScope.launch {
             val isFav = favRepo.isFavorite(productId)
@@ -29,12 +24,11 @@ class FavoriteViewModel @Inject constructor(
         }
     }
 
-    fun toggleFavorite(product: Products) {
+    fun toggleFavorite(product: Products, callback: (Boolean) -> Unit) {
         viewModelScope.launch {
             if (favRepo.isFavorite(product.productId)) {
                 favRepo.removeFromFavorites(product.productId)
             } else {
-                // Products'ı Favorite'a dönüştür
                 val favorite = Favorite(
                     productId = product.productId,
                     productName = product.productName,
@@ -44,6 +38,7 @@ class FavoriteViewModel @Inject constructor(
                     productBrand = product.productBrand
                 )
                 favRepo.addToFavorites(favorite)
+                callback(true)
             }
         }
     }
@@ -53,6 +48,5 @@ class FavoriteViewModel @Inject constructor(
             favRepo.removeFromFavorites(productId)
         }
     }
-
 
 }

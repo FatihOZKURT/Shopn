@@ -3,21 +3,16 @@ package com.example.shopn.ui.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.shopn.data.entity.Products
 import com.example.shopn.data.repo.ShopRepository
-import com.example.shopn.room.Favorite
-import com.example.shopn.room.FavoriteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(var shopRepository: ShopRepository, private val favRepo: FavoriteRepository) : ViewModel() {
+class MainViewModel @Inject constructor(var shopRepository: ShopRepository) : ViewModel() {
 
     var productsList = MutableLiveData<List<Products>>()
     private var allProducts = listOf<Products>()
@@ -25,7 +20,6 @@ class MainViewModel @Inject constructor(var shopRepository: ShopRepository, priv
     init {
         loadProducts()
     }
-
 
     fun loadProducts() {
         CoroutineScope(Dispatchers.Main).launch {

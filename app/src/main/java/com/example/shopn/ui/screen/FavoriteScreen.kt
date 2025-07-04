@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.shopn.R
+import com.example.shopn.data.entity.Products
 import com.example.shopn.databinding.FavoriteScreenBinding
 import com.example.shopn.ui.adapter.FavoriteAdapter
 import com.example.shopn.ui.viewmodel.FavoriteViewModel
@@ -42,9 +43,23 @@ class FavoriteScreen : Fragment() {
                 binding.textViewEmptyFavoritesMessage.visibility = View.GONE
                 binding.recyclerView.visibility = View.VISIBLE
 
-                adapter = FavoriteAdapter(requireContext(), favList) { selectedItem ->
-                    viewModel.removeFavorite(selectedItem.productId)
-                }
+                adapter = FavoriteAdapter(
+                    requireContext(), favList, onRemoveClick = { selectedItem ->
+                        viewModel.removeFavorite(selectedItem.productId)
+                    },
+                    onItemClick = { selectedItem ->
+                        // Favorite -> Products dönüşümü
+                        val product = Products(
+                            productId = selectedItem.productId,
+                            productName = selectedItem.productName,
+                            productImage = selectedItem.productImage,
+                            productCategory = selectedItem.productCategory,
+                            productPrice = selectedItem.productPrice,
+                            productBrand = selectedItem.productBrand
+                        )
+                        val toDetailScreen = FavoriteScreenDirections.actionFavoriteScreenToDetailScreen(product)
+                        findNavController().navigate(toDetailScreen)
+                    })
                 binding.recyclerView.adapter = adapter
             }
         }

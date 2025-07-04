@@ -59,7 +59,11 @@ class ProductsAdapter (
         }
 
         design.imageViewFavorite.setOnClickListener {
-            viewModel.toggleFavorite(product)
+            viewModel.toggleFavorite(product, callback = { isNowFavorite ->
+                design.imageViewFavorite.setImageResource(
+                    if (isNowFavorite) R.drawable.favorite else R.drawable.no_favorite
+                )
+            } )
             notifyItemChanged(position)
         }
     }

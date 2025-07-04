@@ -5,14 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.SearchView
 import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.shopn.R
 import com.example.shopn.databinding.MainScreenBinding
 import com.example.shopn.ui.adapter.ProductsAdapter
 import com.example.shopn.ui.viewmodel.FavoriteViewModel

@@ -2,7 +2,6 @@ package com.example.shopn.retrofit
 
 
 import com.example.shopn.data.entity.CRUDResponse
-import com.example.shopn.data.entity.CartItem
 import com.example.shopn.data.entity.CartResponse
 import com.example.shopn.data.entity.ProductsResponse
 import retrofit2.http.Field

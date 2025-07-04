@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.example.shopn.R
 import com.example.shopn.databinding.ProfileScreenBinding
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,11 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class ProfileScreen : Fragment() {
 
     private lateinit var binding: ProfileScreenBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +35,6 @@ class ProfileScreen : Fragment() {
                 .setNegativeButton("İptal", null)
                 .show()
         }
-
 
 
         return binding.root

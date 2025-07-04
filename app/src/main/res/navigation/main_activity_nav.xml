@@ -78,7 +78,11 @@
         android:id="@+id/favoriteScreen"
         android:name="com.example.shopn.ui.screen.FavoriteScreen"
         android:label="favorite_screen"
-        tools:layout="@layout/favorite_screen" />
+        tools:layout="@layout/favorite_screen" >
+        <action
+            android:id="@+id/action_favoriteScreen_to_detailScreen"
+            app:destination="@id/detailScreen" />
+    </fragment>
     <fragment
         android:id="@+id/profileScreen"
         android:name="com.example.shopn.ui.screen.ProfileScreen"
