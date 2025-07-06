@@ -35,7 +35,7 @@ class CartViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 shopRepository.deleteFromCart(cartId, userName)
-                getCartItems(userName) // Listeyi yenile
+                getCartItems(userName)
             } catch (e: Exception) {
                 Log.e("CartViewModel", "Silme işlemi başarısız", e)
             }
@@ -54,12 +54,11 @@ class CartViewModel @Inject constructor(
     ) {
         viewModelScope.launch {
             try {
-                // Önce eskiyi sil
+
                 shopRepository.deleteFromCart(cartId, kullaniciAdi)
-                // Sonra yeni adetle tekrar ekle
                 shopRepository.addToCart(ad, resim, kategori, fiyat, marka, yeniAdet, kullaniciAdi)
-                // Listeyi güncelle
                 getCartItems(kullaniciAdi)
+
             } catch (e: Exception) {
                 Log.e("CartViewModel", "Güncelleme hatası", e)
             }

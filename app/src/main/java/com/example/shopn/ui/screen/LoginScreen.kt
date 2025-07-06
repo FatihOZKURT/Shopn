@@ -24,6 +24,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.core.content.edit
+import com.example.shopn.util.PasswordVisibilityHelper
 
 @AndroidEntryPoint
 class LoginScreen : Fragment() {
@@ -93,6 +94,7 @@ class LoginScreen : Fragment() {
                     Toast.makeText(requireContext(), "Hata: ${it.localizedMessage}", Toast.LENGTH_SHORT).show()
                 }
         }
+        PasswordVisibilityHelper(requireContext(), binding.passwordTextLogin)
 
         return binding.root
     }

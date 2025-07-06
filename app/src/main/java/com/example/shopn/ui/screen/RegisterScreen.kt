@@ -23,6 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlin.getValue
 import com.example.shopn.R
 import androidx.core.content.edit
+import com.example.shopn.util.PasswordVisibilityHelper
 
 @AndroidEntryPoint
 class RegisterScreen : Fragment() {
@@ -77,6 +78,9 @@ class RegisterScreen : Fragment() {
         binding.goToLoginText.setOnClickListener {
             findNavController().navigateUp()
         }
+
+        PasswordVisibilityHelper(requireContext(), binding.passwordTextRegister)
+        PasswordVisibilityHelper(requireContext(), binding.confirmPassword)
 
         observeViewModel()
 
