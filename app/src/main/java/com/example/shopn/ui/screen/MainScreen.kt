@@ -8,9 +8,13 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.shopn.R
+import com.example.shopn.data.entity.SpecialOffer
 import com.example.shopn.databinding.MainScreenBinding
 import com.example.shopn.ui.adapter.ProductsAdapter
+import com.example.shopn.ui.adapter.SpecialOffersAdapter
 import com.example.shopn.ui.viewmodel.FavoriteViewModel
 import com.example.shopn.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,6 +60,18 @@ class MainScreen : Fragment() {
         }
 
         binding.recyclerViewProducts.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
+
+        val specialOffers = listOf(
+            SpecialOffer(R.drawable.offer1),
+            SpecialOffer( R.drawable.offer2),
+            SpecialOffer( R.drawable.offer3),
+        )
+
+        val specialAdapter = SpecialOffersAdapter(specialOffers)
+        binding.recyclerViewSpecialOffers.adapter = specialAdapter
+        binding.recyclerViewSpecialOffers.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         return binding.root
     }

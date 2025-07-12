@@ -20,7 +20,7 @@
         android:iconifiedByDefault="false"
         android:queryHint="Ürün, kategori, marka ara..."
         android:queryBackground="@android:color/transparent"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerViewProducts"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewSpecialOffers"
         app:layout_constraintEnd_toStartOf="@+id/addressButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -40,6 +40,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.25" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewSpecialOffers"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:clipToPadding="false"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewProducts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProducts"
@@ -51,8 +63,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
-
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewSpecialOffers" />
 
 
 
